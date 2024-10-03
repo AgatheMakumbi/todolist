@@ -44,7 +44,13 @@ if (isset($_POST['action'])) {
 
       $id = $_POST['id'];
       if(is_numeric($id)) {
-        $updateQuery = ''; // IMPLEMENT ME
+        $updateQuery = "
+        UPDATE tasks
+        SET completed = CASE
+            WHEN completed = 1 THEN 0
+            ELSE 0 
+        END 
+        WHERE id =$id"; // IMPLEMENT ME
         if(!$db->query($updateQuery)) {
           die(print_r($db->errorInfo(), true));
         }
