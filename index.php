@@ -8,7 +8,7 @@
 define('BASE_URL', '/comem-archidep-php-todo-exercise');
 
 // Database connection parameters.
-define('DB_USER', 'todolist');
+define('DB_USER', 'root');
 define('DB_PASS', 'root');
 define('DB_NAME', 'todolist');
 define('DB_HOST', '127.0.0.1');
