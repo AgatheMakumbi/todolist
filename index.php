@@ -64,11 +64,11 @@ if (isset($_POST['action'])) {
     case 'delete':
 
       $id = $_POST['id'];
-      if(is_numeric($id)) {
-        $deleteQuery = ''; // IMPLEMENT ME
-        if(!$db->query($deleteQuery)) {
-          die(print_r($db->errorInfo(), true));
-        }
+      $deleteQuery = 'DELETE FROM todo WHERE id = :id';
+      $stmt = $db->prepare($deleteQuery);
+      if(!$stmt->execute([':id' => $id])) {
+        die(print_r($db->errorInfo(), true));
+       }
       }
 
       header('Location: '.BASE_URL);
