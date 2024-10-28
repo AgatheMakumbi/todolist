@@ -25,10 +25,19 @@ if (isset($_POST['action'])) {
      * Insert a new task into the database, then redirect to the base URL.
      */
     case 'new':
-
+      
       $title = $_POST['title'];
-      if ($title && $title !== '') {
+      //$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+      // ou 
+      /* if ($title && $title !== '') {
         $insertQuery = 'INSERT INTO todo VALUES(NULL, \''.$title.'\', FALSE, CURRENT_TIMESTAMP)';
+        if (!$db->query($insertQuery)) {
+          die(print_r($db->errorInfo(), true));
+        }
+      } */
+      if ($title && $title !== '') {
+        $insert = $db->prepare('INSERT INTO todo VALUES(NULL, :title, FALSE, CURRENT_TIMESTAMP)');
+        $sm
         if (!$db->query($insertQuery)) {
           die(print_r($db->errorInfo(), true));
         }
@@ -136,7 +145,7 @@ $items = $db->query($selectQuery);
         <?php foreach($items as $item): ?>
           <div class='list-group-item d-flex justify-content-between align-items-center<?php if($item['done']): ?> list-group-item-success<?php else: ?> list-group-item-warning<?php endif;?>'>
 
-            <div class='title'><?= $item['title'] ?></div>
+            <div class='title'><?= htmlspecialchars($item['title']) ?></div>
 
             <!-- Todo item controls -->
             <form action='<?= BASE_URL ?>' method='post'>
