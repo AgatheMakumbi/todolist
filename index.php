@@ -43,8 +43,10 @@ if (isset($_POST['action'])) {
           die(print_r($db->errorInfo(), true));
         }
       }
+      //header() permet de spécifier l'en-tête HTTP string lors de l'envoi des fichiers HTML.
 
-      header('Location: '.BASE_URL);
+      header('Location: '.BASE_URL);/* Redirection du navigateur */
+      /* pour s'assurer que la suite du code ne soit pas exécutée une fois la redirection effectuée. */
       die();
 
     /**
@@ -119,7 +121,7 @@ $items = $db->query($selectQuery);
       <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container d-flex justify-content-between">
           <a href="#" class="navbar-brand d-flex align-items-center">
-            <strong>TodoList</strong>
+            <strong style="color : blue;">TodoList</strong>
           </a>
         </div>
       </div>
